@@ -28,9 +28,11 @@ If you are interested in 2.7 or earlier support, please **help us** and refer to
 Using `pip`
 -----------
 
+Currently **NOT** supported.
+
 .. code-block::
 
-    pip3 install -e https://github.com/nextbiopy/nextbiopy.git
+    pip3 install nextbiopy
 
 Compiled from source
 --------------------
