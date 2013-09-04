@@ -3,6 +3,7 @@ import os
 import re
 from distutils.core import setup, Command
 from distutils.command.sdist import sdist as _sdist
+from distutils.errors import DistutilsSetupError
 
 VERSION_PY = """\
 # This file is originally generated from Git information by running
@@ -12,30 +13,42 @@ VERSION_PY = """\
 __version__ = '{:s}'
 """
 
+VERSION_ERR_MSG = """\
+Unexpected version number: {:s}.
+Git tags should be set properly, e.g., v0.1.0
+"""
+
+VER_PATH = 'nextbiopy/_version.py'
+
 def update_version_py():
     if not os.path.exists('.git'):
         print("This does not appear to be a Git repository.")
         return
     try:
-        p = subprocess.Popen([
-            "git", "describe", "--tags", "--dirty", "--always"],
-            stdout=subprocess.PIPE)
+        p = subprocess.Popen(
+            ["git", "describe", "--tags", "--dirty", "--always"],
+            stdout=subprocess.PIPE
+        )
     except EnvironmentError:
-        print("unable to run git, leaving ngs/_version.py alone")
+        print("unable to run git, leaving _version.py alone".format(VER_PATH))
         return
-    stdout = p.communicate()[0].decode('utf8')
+    stdout = p.communicate()[0].decode('utf8').rstrip()
     if p.returncode != 0:
-        print("unable to run git, leaving ngs/_version.py alone")
+        print("unable to run git, leaving _version.py alone")
         return
-    # we use tags like "python-ecdsa-0.5", so strip the prefix
-    ver = stdout.strip()[len('v'):]     # no "v"x.x.x in _version.py
-    with open('nextbiopy/_version.py', 'w') as f:
+    # we use tags like "v0.5", so strip the prefix "v"
+    if not stdout.startswith('v'):
+        raise DistutilsSetupError(VERSION_ERR_MSG.format(stdout))
+    ver = stdout[len('v'):]
+    # write version to _version.py
+    with open(VER_PATH, 'w') as f:
         f.write(VERSION_PY.format(ver))
-    print("set nextbiopy/_version.py to '{:s}'".format(ver))
+    print("set {:s} to '{:s}'".format(VER_PATH, ver))
+
 
 def get_version():
     try:
-        f = open("ngs/_version.py")
+        f = open(VER_PATH)
     except EnvironmentError:
         return None
     for line in f.readlines():
@@ -47,7 +60,7 @@ def get_version():
 
 
 class Version(Command):
-    description = "update _version.py from Git repo"
+    description = "update _version.py from git repo"
     user_options = []
     boolean_options = []
 
@@ -59,7 +72,11 @@ class Version(Command):
 
     def run(self):
         update_version_py()
-        print("Version is now", get_version())
+        ver = get_version()
+        print("Version is now", ver)
+        if ver.endswith('-dirty'):
+            print('You are in DEV mode, '
+                  'not all code changes have been committed')
 
 
 class sdist(_sdist):
