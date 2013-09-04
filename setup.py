@@ -103,9 +103,6 @@ setup(
         '': ['*.txt', '*.rst'],
     },
     scripts=[],
-    long_description=(
-
-    ),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
