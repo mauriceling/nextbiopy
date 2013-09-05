@@ -102,8 +102,7 @@ class sdist(_sdist):
             ver_pattern = "^\d+[.]\d+[.]\d+$"
             ver = get_version()
             if not re.match(ver_pattern, ver):
-                print("version is not clean, don't issue a release")
-                return
+                sys.exit("version is not clean, don't issue a release")
             self.distribution.metadata.version = ver
         return _sdist.run(self)
 
