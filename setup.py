@@ -1,3 +1,4 @@
+import sys
 import subprocess
 import os
 import re
@@ -20,6 +21,18 @@ Git tags should be set properly, e.g., v0.1.0
 """
 
 VER_PATH = 'nextbiopy/_version.py'
+
+# Python version check, currently supports 3.3 and up
+PYTHON_2_MSG = """\
+require Python 3.3 and up, currently 2.x not supported.
+
+However, we have planned to port it back to 2.7 and we are asking for help!
+Please help this issue:
+    https://github.com/nextbiopy/nextbiopy/issues/1
+"""
+
+if sys.version_info < (3, 3):
+    sys.exit(PYTHON_2_MSG)
 
 def update_version_py():
     if not os.path.exists('.git'):
