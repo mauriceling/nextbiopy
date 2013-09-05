@@ -85,6 +85,12 @@ We plan to host the documentation on `readthedocs`_, please help us and refer to
 __ https://github.com/nextbiopy/nextbiopy/issues/2
 
 
+Contributing
+============
+
+We follows the guideline http://pandas.pydata.org/developers.html, it is likely that we will put our own version at `Contrib.rst`.
+
+
 Bug Report and Feature Request
 ==============================
 
