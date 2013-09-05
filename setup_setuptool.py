@@ -1,10 +1,17 @@
 import sys
+import warnings
 
+#------------------------------------------------------------------------------
+# Python Version Dection
+#------------------------------------------------------------------------------
 # arguments of 3.x specific for setuptools
 setup_kwargs = {}
 if sys.version_info >= (3,):
     setup_kwargs['use_2to3'] = False
 
+#------------------------------------------------------------------------------
+# Setuptools
+#------------------------------------------------------------------------------
 # require setuptools >= 0.9
 import pkg_resources
 try:
@@ -12,6 +19,7 @@ try:
 except pkg_resources.VersionConflict:
     from ez_setup import use_setuptools
     use_setuptools(version="0.9.6")
+
 from setuptools import setup
 
 # Python version check, currently supports 3.3 and up
@@ -25,8 +33,106 @@ Please help this issue:
 if sys.version_info < (3, 3):
     sys.exit(PYTHON_2_MSG)
 
-__version__ = '0.0.0'
 
+#-----------------------------------------------------------------------------
+# Package Information
+#-----------------------------------------------------------------------------
+MAJOR = 0
+MINOR = 0
+MICRO = 0
+ISRELEASED = False
+VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
+QUALIFIER = ''       # something like rc1, rc2
+
+AUTHOR = 'Liang Bo Wang'
+AUTHOR_EMAIL = 'b98901114@ntu.edu.tw'
+MAINTAINER = 'Liang Bo Wang'
+MAINTAINER_EMAIL = 'b98901114@ntu.edu.tw'
+URL = 'https://github.com/nextbiopy/nextbiopy'
+DESCRIPTION = 'Next bio python utility library'
+LONG_DESC = """\
+**NextBiopy** is a Python package providing basic, fast, and flexible data
+structure to store file formats widely-used in Biology.
+
+NextBiopy aims to support the following file format:
+
+  - FASTA/Q
+  - BAM/SAM (using `PySAM <https://code.google.com/p/pysam/>`__)
+"""
+LICENSE = "MIT"
+CLASSIFIERS = [
+    'Development Status :: 1 - Planning',
+    'Environment :: Console',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.3',
+    'Operating System :: OS Independent',
+    'Intended Audience :: Science/Research'
+    'Topic :: Scientific/Engineering',
+    'Topic :: Scientific/Engineering :: Bio-Informatics',
+]
+
+
+#-----------------------------------------------------------------------------
+# Version Management
+#-----------------------------------------------------------------------------
+# This section of code is adapted from the pandas project
+# (https://github.com/pydata/pandas)
+# which have been permitted for use under the BSD license.
+PTH_VERSION_PY = "nextbiopy/_version.py"
+
+FULLVERSION = VERSION
+GIT_VER_CMD = ["git", "describe", "--tags", "--always"]
+
+VERSION_PY = """\
+# This file is originally generated from Git information by running
+#     $ python3 setup.py version
+# Distribution tarballs contain a pre-generated copy of this file.
+
+__version__ = '{:s}'
+"""
+
+if not ISRELEASED:
+    FULLVERSION += '.dev'
+    import subprocess
+    try:
+        p = subprocess.Popen(
+            GIT_VER_CMD,
+            stdout=subprocess.PIPE
+        )
+    except OSError:
+        # msysgit compatibility
+        p = subprocess.Popen(
+            GIT_VER_CMD,
+            stdout=subprocess.PIPE
+        )
+    rev = p.communicate()[0]
+    if p.returncode != 0:
+        warnings.warn("WARNING: Couldn't get git revision")
+    else:
+        if sys.version_info[0] >= 3:
+            rev = rev.decode('utf8')
+        FULLVERSION = rev.rstrip().lstrip('v')
+else:
+    FULLVERSION += QUALIFIER
+
+def write_version_py():
+    # write version to _version.py
+    with open(PTH_VERSION_PY, 'w') as f:
+        f.write(VERSION_PY.format(FULLVERSION))
+
+write_version_py()
+
+#-----------------------------------------------------------------------------
+# Unit Test using nose
+#-----------------------------------------------------------------------------
+setup_kwargs["test_suite"] = "nose.collector"
+
+
+#-----------------------------------------------------------------------------
+# Setup
+#-----------------------------------------------------------------------------
 setup(
     name='nextbiopy',
     packages=['nextbiopy'],
@@ -36,22 +142,16 @@ setup(
     },
     zip_safe=False,     # may contain C extension
     # metadata for PyPI
-    license='MIT',
-    version=__version__,
-    description='Next bio python utility library',
-    author='Liang Bo Wang',
-    author_email='b98901114@ntu.edu.tw',
-    maintainer='Liang Bo Wang',
-    maintainer_email='b98901114@ntu.edu.tw',
-    url='https://github.com/nextbiopy/nextbiopy',
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Environment :: Console',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3.3',
-        'Topic :: Utilities',
-    ],
+    license=LICENSE,
+    version=FULLVERSION,
+    description=DESCRIPTION,
+    long_description=LONG_DESC,
+    author=AUTHOR,
+    author_email=AUTHOR_EMAIL,
+    maintainer=MAINTAINER,
+    maintainer_email=MAINTAINER_EMAIL,
+    url=URL,
+    classifiers=CLASSIFIERS,
+    platforms='any',
     **setup_kwargs
 )
