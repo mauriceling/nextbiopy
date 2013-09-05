@@ -1,6 +1,7 @@
 import subprocess
 import os
 import re
+import warnings
 from distutils.core import setup, Command
 from distutils.command.sdist import sdist as _sdist
 from distutils.errors import DistutilsSetupError
@@ -55,6 +56,8 @@ def get_version():
         mo = re.match("__version__ = '([^']+)'", line)
         if mo:
             ver = mo.group(1)
+            if ver.endswith('-dirty'):
+                warnings.warn('Not all code changes have been committed')
             return ver
     return None
 
@@ -73,17 +76,22 @@ class Version(Command):
     def run(self):
         update_version_py()
         ver = get_version()
-        print("Version is now", ver)
-        if ver.endswith('-dirty'):
-            print('You are in DEV mode, '
-                  'not all code changes have been committed')
+        print("version is now", ver)
 
 
 class sdist(_sdist):
     def run(self):
-        # regenerate version number for every release
-        update_version_py()
-        self.distribution.metadata.version = get_version()
+        with warnings.catch_warnings(record=True):
+            # Cause all warnings to always be triggered.
+            warnings.simplefilter("always")
+            # regenerate version number for every release
+            update_version_py()
+            ver_pattern = "^\d+[.]\d+[.]\d+$"
+            ver = get_version()
+            if not re.match(ver_pattern, ver):
+                print("version is not clean, don't issue a release")
+                return
+            self.distribution.metadata.version = ver
         return _sdist.run(self)
 
 
