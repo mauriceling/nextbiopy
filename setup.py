@@ -88,7 +88,7 @@ GIT_VER_CMD = ["git", "describe", "--tags", "--always"]
 
 VERSION_PY = """\
 # This file is originally generated from Git information by running
-#     $ python3 setup.py version
+#     $ python3 setup.py --version
 # Distribution tarballs contain a pre-generated copy of this file.
 
 __version__ = '{:s}'
