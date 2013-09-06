@@ -1,5 +1,6 @@
 import sys
 import warnings
+import re
 
 #------------------------------------------------------------------------------
 # Python Version Dection
@@ -93,35 +94,56 @@ VERSION_PY = """\
 __version__ = '{:s}'
 """
 
-if not ISRELEASED:
-    FULLVERSION += '.dev'
-    import subprocess
-    try:
-        p = subprocess.Popen(
-            GIT_VER_CMD,
-            stdout=subprocess.PIPE
-        )
-    except OSError:
-        # msysgit compatibility
-        p = subprocess.Popen(
-            GIT_VER_CMD,
-            stdout=subprocess.PIPE
-        )
-    rev = p.communicate()[0]
-    if p.returncode != 0:
-        warnings.warn("WARNING: Couldn't get git revision")
-    else:
-        if sys.version_info[0] >= 3:
-            rev = rev.decode('utf8')
-        FULLVERSION = rev.rstrip().lstrip('v')
-else:
-    FULLVERSION += QUALIFIER
-
 def write_version_py():
     # write version to _version.py
     with open(PTH_VERSION_PY, 'w') as f:
         f.write(VERSION_PY.format(FULLVERSION))
 
+def read_version_py():
+    try:
+        for line in open(PTH_VERSION_PY):
+            mo = re.match("__version__ = '([^']+)'", line)
+            if mo:
+                ver = mo.group(1)
+                return ver
+        return None
+    except EnvironmentError:
+        return None
+
+
+def set_full_version(full_version=FULLVERSION):
+    if not ISRELEASED:
+        full_version += '.dev'
+        import subprocess
+        try:
+            p = subprocess.Popen(
+                GIT_VER_CMD,
+                stdout=subprocess.PIPE
+            )
+        except OSError:
+            # msysgit compatibility
+            p = subprocess.Popen(
+                GIT_VER_CMD,
+                stdout=subprocess.PIPE
+            )
+        rev = p.communicate()[0]
+        if p.returncode == 0:
+            if sys.version_info[0] >= 3:
+                rev = rev.decode('utf8')
+            full_version = rev.rstrip().lstrip('v')
+        else:
+            warnings.warn("Couldn't get git revision, try _version.py")
+            ver = read_version_py()
+            if ver is not None:
+                print("use %s from _version.py, may be incorrect" % ver)
+                full_version = ver
+            else:
+                warnings.warn("version info not found, use ambiguous one")
+    else:
+        full_version += QUALIFIER
+    return full_version
+
+FULLVERSION = set_full_version()
 write_version_py()
 
 #-----------------------------------------------------------------------------
