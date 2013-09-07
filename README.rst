@@ -28,7 +28,7 @@ If you are interested in 2.7 or earlier support, please **help us** and refer to
 Using ``pip``
 -------------
 
-Currently **NOT** support installing from PyPI.
+.. warning:: Currently **NOT** support installing from PyPI.
 
 .. code-block::
 
@@ -78,17 +78,15 @@ MIT
 Documentation
 =============
 
-We plan to host the documentation on `readthedocs`_, please help us and refer to this `issue`__.
-
-.. _readthedocs: https://readthedocs.org/
-
-__ https://github.com/nextbiopy/nextbiopy/issues/2
+We host the documentation on `readthedocs <nextbiopy.rtfd.org>`_
 
 
 Contributing
 ============
 
-We follows the guideline http://pandas.pydata.org/developers.html, it is likely that we will put our own version at `Contrib.rst`.
+Please refer to the `wiki`__ page.
+
+__ https://github.com/nextbiopy/nextbiopy/wiki/Contributing-and-Environment-Setup
 
 
 Bug Report and Feature Request
