@@ -1,15 +1,18 @@
-Welcome to NextBiopy's documentation!
-=====================================
+#######################
+NextBiopy Documentation
+#######################
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
 
-   tutorial 
+   installation
+   quickstart
+   tutorial
    nextbiopy
+   DEVLOP/development
 
-.. put all *.rst here in order
 
 Indices and tables
 ==================
