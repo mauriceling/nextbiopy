@@ -1,7 +1,6 @@
 """Core data structure
 
-.. moduleauthor:: Liang Bo Wang<ccwang002@gmail.com>
-
+.. moduleauthor:: Liang Bo Wang
 """
 
 class Seq():
