@@ -53,14 +53,43 @@ Besides mentioned in :ref:`Prequisites for Installation <prequisites>`, extra pa
 Build up the Environemnt
 ========================
 
-All tools are recommended to be installed in a **virtual environment**, usually set by `virtualenv`_.
+It is recommended to createn a **virtual environment**, usually set by `virtualenv`_.
 
-They should be installed properly by either ``pip-3.3 install <package>`` or ``easy_install-3.3 <package>``.
+.. code-block:: bash
 
-Installing from zipped source file through pip is possible. Take `numpydoc`_ as example,
+    $ pip-3.3 install virtualenv
+    $ virtualenv-3.3 VENV_nextbiopy
+    $ source VENV_nextbiopy/bin/activate
+    (VENV_nextbiopy)$ which pip-3.3
+    # /path/to/venv/bin/pip-3.3
+    (VENV_nextbiopy)$ deactivate
+    $
+
+So the development is isolated and let the system Python environment unaffected.
+
+Then each package can be installed properly by either ``pip-3.3 install <package>`` or ``easy_install-3.3 <package>``.
+
+It is possible to install zipped source file through pip.
+
+Take `numpydoc`_ as example,
 
 .. code-block:: bash
 
     wget https://github.com/numpy/numpydoc/archive/master.zip
     pip-3.3 install master.zip
 
+
+Build NextBiopy linked to source
+--------------------------------
+
+Keep rebuilding from source is tedious, though that is the mosted clean way.
+
+In most cases, we can build the source **in-place** without copying everything into ``site-packages``,
+so it reflects the code change after reloading it.
+
+.. code-block:: bash
+
+    # recommended in a virtual env
+    python3 setup.py develop
+
+.. note:: version number won't change unless you trigger ``setup.py`` again.

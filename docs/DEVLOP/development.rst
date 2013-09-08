@@ -2,8 +2,6 @@
 Development
 ###########
 
-You can help our development!
-
 .. toctree::
    :maxdepth: 2
 
