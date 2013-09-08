@@ -53,16 +53,29 @@ Besides mentioned in :ref:`Prequisites for Installation <prequisites>`, extra pa
 Build up the Environemnt
 ========================
 
-It is recommended to createn a **virtual environment**, usually set by `virtualenv`_.
+It is recommended to create a **virtual environment**, usually set by `virtualenv`_.
+
+Create an virtual environment by
 
 .. code-block:: bash
 
-    virtualenv-3.3 VENV_nextbiopy
-    source VENV_nextbiopy/bin/activate
-    (VENV_nextbiopy) which pip-3.3
+    $ virtualenv-3.3 venv
+
+Use it by
+
+.. code-block:: bash
+
+    $ cd venv
+    $ source bin/activate
+    (venv)$ which pip-3.3
     # /path/to/venv/bin/pip-3.3
-    (VENV_nextbiopy) deactivate
-    
+
+And leave it by
+
+.. code-block:: bash
+
+    (venv)$ deactivate
+    $
 
 So the development is isolated and let the system Python environment unaffected.
 
@@ -81,7 +94,7 @@ Take `numpydoc`_ as example,
 Build NextBiopy linked to source
 --------------------------------
 
-Keep rebuilding from source is tedious, though that is the mosted clean way.
+Keep rebuilding from source is tedious, though that is the most clean way.
 
 In most cases, we can build the source **in-place** without copying everything into ``site-packages``,
 so it reflects the code change after reloading it.
@@ -92,3 +105,45 @@ so it reflects the code change after reloading it.
     python3 setup.py develop
 
 .. note:: version number won't change unless you trigger ``setup.py`` again.
+
+
+Test the Environment Setup
+==========================
+
+Always remember to source your virtual environment.
+
+Source Code Linkage
+-------------------
+
+Now ``nextbiopy.__path__`` should be the path to your source code,
+rather than somewhere inside ``site-packages``.
+
+.. code-block:: python3
+
+    >>> import nextbiopy as nb
+    >>> nb.__path__
+    ['/path/to/source/code/root/nextbiopy/nextbiopy']
+
+
+Build Local Documentation
+-------------------------
+
+Scripts for building documentation should be properly set,
+so there is no need to modify the configuration, which stores at ``docs/conf.py``.
+
+Unix-like
+^^^^^^^^^
+
+.. code-block:: bash
+
+    cd docs
+    make html
+
+The generated html documentation by default should be under ``_build/html``.
+
+Windows
+^^^^^^^
+
+.. warning::
+    Currently no developers are maintaining Windows version and we are **asking for help!**
+    See `issue @GitHub <https://github.com/nextbiopy/nextbiopy/issues/8>`__

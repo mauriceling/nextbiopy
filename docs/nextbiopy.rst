@@ -1,5 +1,5 @@
-:mod:`nextbiopy` Package
-========================
+Package API
+===========
 
 .. automodule:: nextbiopy.__init__
     :members:
@@ -8,5 +8,5 @@
 --------------------------------
 
 .. automodule:: nextbiopy.core
-    :members: Seq
-
+    :members:
+    :show-inheritance:

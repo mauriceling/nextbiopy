@@ -5,8 +5,7 @@ Development
 .. toctree::
    :maxdepth: 2
 
-   howto_contrib
    env_setup
-   testing_benchmark
+   howto_contrib
    conventions
 
