@@ -57,13 +57,12 @@ It is recommended to createn a **virtual environment**, usually set by `virtuale
 
 .. code-block:: bash
 
-    $ pip-3.3 install virtualenv
-    $ virtualenv-3.3 VENV_nextbiopy
-    $ source VENV_nextbiopy/bin/activate
-    (VENV_nextbiopy)$ which pip-3.3
+    virtualenv-3.3 VENV_nextbiopy
+    source VENV_nextbiopy/bin/activate
+    (VENV_nextbiopy) which pip-3.3
     # /path/to/venv/bin/pip-3.3
-    (VENV_nextbiopy)$ deactivate
-    $
+    (VENV_nextbiopy) deactivate
+    
 
 So the development is isolated and let the system Python environment unaffected.
 
