@@ -76,7 +76,7 @@ Contributing
 
 Please refer to this documentation `page`__.
 
-__ http://nextbiopy.readthedocs.org/en/latest/DEVLOP/development.html
+__ http://nextbiopy.readthedocs.org/
 
 
 Bug Report and Feature Request
