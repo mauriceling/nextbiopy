@@ -11,7 +11,7 @@ Contents:
    quickstart
    tutorial
    nextbiopy
-   DEVLOP/development
+   DEVELOP/development
 
 
 Indices and tables
