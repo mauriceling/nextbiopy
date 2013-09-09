@@ -13,13 +13,29 @@ if sys.version_info >= (3,):
 #------------------------------------------------------------------------------
 # Setuptools
 #------------------------------------------------------------------------------
+SETUPTOOLS_MSG = """\
+{:s}
+Try download and install it using official script ez_setup.py.
+For more infomation, see setuptools site:
+    http://pythonhosted.org/setuptools/index.html
+"""
 # require setuptools >= 0.9
-import pkg_resources
 try:
-    pkg_resources.require("setuptools>=0.9")
-except pkg_resources.VersionConflict:
+    import pkg_resources
+    try:
+        pkg_resources.require("setuptools>=0.9")
+    except pkg_resources.VersionConflict:
+        print(
+            SETUPTOOLS_MSG.format("Require newer setuptools (>= 0.9).")
+        )
+        from ez_setup import use_setuptools
+        use_setuptools(version="0.9.6")
+except ImportError:
+    print(
+        SETUPTOOLS_MSG.format("No setuptools installed.")
+    )
     from ez_setup import use_setuptools
-    use_setuptools(version="0.9.6")
+    use_setuptools()
 
 from setuptools import setup
 
