@@ -66,7 +66,7 @@ AUTHOR_EMAIL = 'b98901114@ntu.edu.tw'
 MAINTAINER = 'Liang Bo Wang'
 MAINTAINER_EMAIL = 'b98901114@ntu.edu.tw'
 URL = 'https://github.com/nextbiopy/nextbiopy'
-DESCRIPTION = 'Next bio python utility library'
+DESCRIPTION = 'Next bio python library'
 LONG_DESC = """\
 **NextBiopy** is a Python package providing basic, fast, and flexible data
 structure to store file formats widely-used in Biology.
