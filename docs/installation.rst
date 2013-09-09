@@ -37,6 +37,11 @@ use `pip`_ to install.
 .. _pip: www.pip-installer.org/
 __ https://github.com/nextbiopy/nextbiopy/archive/master.zip
 
+.. note:: 
+    Since NextBiopy are still in early phase of development,
+    currently we recommend to use :ref:`installation from git <install_git>`.
+
+.. _install_git:
 
 From Git
 --------
@@ -71,9 +76,9 @@ Generally NextBiopy requires the following packages:
 .. _Numpy: http://www.numpy.org/
 .. _pandas: http://pandas.pydata.org/
 
-
 Optional
 --------
 
-- PySAM
-- PyVCF
+- `nose`_ for unit testing
+
+.. _nose: http://nose.readthedocs.org/
