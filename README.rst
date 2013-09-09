@@ -68,7 +68,7 @@ MIT
 Documentation
 =============
 
-We host the documentation on `readthedocs <nextbiopy.rtfd.org>`_.
+We host the documentation on `readthedocs <http://nextbiopy.rtfd.org>`_.
 
 
 Contributing
@@ -76,7 +76,7 @@ Contributing
 
 Please refer to this documentation `page`__.
 
-__ http://nextbiopy.readthedocs.org/
+__ http://nextbiopy.readthedocs.org/en/latest/DEVELOP/development.html
 
 
 Bug Report and Feature Request
