@@ -5,7 +5,7 @@ Set up Development Environment
 Prequisites
 ===========
 
-Besides mentioned in :ref:`Prequisites for Installation <prequisites>`, extra packages are needed for development.
+Besides mentioned in :ref:`Prequisites for Installation <dependencies>`, extra packages are needed for development.
 
 **Syntax Checker (Linter)**
 

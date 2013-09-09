@@ -2,7 +2,78 @@
 Installation
 ############
 
-.. _prequisites:
 
-Prequisites
-===========
+Quick Install
+=============
+
+Nextbiopy requires Python **3.3 and up**.
+
+.. note::
+    If you are interested in 2.7 or earlier support,
+    please **help us** and refer to this `issue <https://github.com/nextbiopy/nextbiopy/issues/1>`_.
+
+
+From PyPI
+---------
+
+.. warning:: Currently **NOT** supported
+
+.. code-block:: bash
+
+    pip3 install nextbiopy
+
+
+From Zipped Source
+------------------
+
+Download the zipped source file from `here`__,
+use `pip`_ to install.
+
+.. code-block:: bash
+
+    wget https://github.com/nextbiopy/nextbiopy/archive/master.zip
+    pip3 install master.zip
+
+.. _pip: www.pip-installer.org/
+__ https://github.com/nextbiopy/nextbiopy/archive/master.zip
+
+
+From Git
+--------
+.. code-block:: bash
+
+    git clone https://github.com/nextbiopy/nextbiopy.git
+    cd nextbiopy
+    python3 setup.py install
+
+
+.. _dependencies:
+
+Finally, check the installation by
+
+.. code-block:: python
+
+    >>> import nextbiopy as nb
+    >>> print(nb.__version__)
+
+
+Dependencies
+============
+
+Required
+--------
+
+Generally NextBiopy requires the following packages:
+
+- `Numpy`_
+- `pandas`_
+
+.. _Numpy: http://www.numpy.org/
+.. _pandas: http://pandas.pydata.org/
+
+
+Optional
+--------
+
+- PySAM
+- PyVCF
