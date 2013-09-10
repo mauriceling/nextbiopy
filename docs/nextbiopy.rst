@@ -7,6 +7,10 @@ Package API
 :mod:`nextbiopy.core` Module
 --------------------------------
 
-.. automodule:: nextbiopy.core
+.. autoexception:: nextbiopy.core.FormatError
     :members:
-    :show-inheritance:
+
+.. autoclass:: nextbiopy.core.Seq
+    :members:
+    :special-members: __init__
+
