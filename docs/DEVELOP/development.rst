@@ -83,7 +83,7 @@ However it can be summed up as
 
 1. Write your code
 2. Add tests if needed (for example, add new functions or classes)
-3. Pass all tests
+3. Pass all tests and total coverage should exceeds 80%
 4. Complete your docstring (at least short descriptions. Examples are nice!)
 5. Check your code if they follow the coding style
 6. Submit your code by sending us a pull request (PR) (see if your PR pass Travis CI)
