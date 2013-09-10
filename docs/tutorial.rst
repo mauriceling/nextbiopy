@@ -1,4 +1,4 @@
 Tutorial
 ========
 
-:py:mod:`Seq <nextbiopy.core.Seq>`
+:class:`~nextbiopy.core.Seq`
