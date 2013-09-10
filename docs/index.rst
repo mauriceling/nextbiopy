@@ -15,6 +15,7 @@ It aims to support the following file format:
 
   - FASTA/Q
   - BAM/SAM (using `PySAM <https://code.google.com/p/pysam/>`__)
+  - VCF (using `PyVCF <https://github.com/jamescasbon/PyVCF>`__) 
 
 Underneath it extends `numpy`_ and `pandas`_ so it should be easy to import your sequence data into further data analysis.
 
