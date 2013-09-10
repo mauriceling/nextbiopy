@@ -79,7 +79,7 @@ Contributing Code
 -----------------
 
 Contributing codes requires some steps to follow, which are detailed in docs linked in the end.
-However it can be summed up as 
+However it can be summed up as
 
 1. Write your code
 2. Add tests if needed (for example, add new functions or classes)
@@ -102,6 +102,35 @@ So the following links will take you into the details of contributing steps.
    doc_string_style
    testing
    conventions
+   release_version
+
+As a good start, `Python Guide <http://docs.python-guide.org/en/latest/>`__,
+also known as *The Hitchhiker's Guide to Python*, serves as a good practice of Python development How-To.
+
+One is highly recommended to follow this site being the first time.
 
 FAQ
 ===
+
+1.  **Q:** I am not an English native speaker, can I use Chines or Japanese instead?
+
+    **A:** We use **English** in discussion.
+
+    Though most people here are from non-English-native countries,
+    using English could help others join our discussion.
+
+    If you find yourself trouble using English,
+    it would be fine to put your words in Japanese or Chinese again,
+    and let others check whether they means the same.
+
+    For example,
+
+    .. code-block:: none
+
+        We could put all utility functions for Unincode of Python 2.7 in a separate module.
+        Because it is often used, so we should discuss
+        what module names would best expressed its function ?
+        ----
+        我們要不要把 Python 2.7 中 Unicode 相關處理的函式放在一個獨立的 module 中？
+        因為它蠻常用的，也許我們可以投票一下決定什麼名字比較好？
+
