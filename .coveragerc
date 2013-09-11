@@ -1,0 +1,6 @@
+[run]
+source = nextbiopy 
+
+[report]
+exclude_lines =
+    pragma: no cover
