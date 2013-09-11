@@ -1,6 +1,6 @@
-###########
-Development
-###########
+#################
+Developers' Guide
+#################
 
 We are asking for help if anyone is interested in making next-generation sequencing analysis easier in Python.
 
