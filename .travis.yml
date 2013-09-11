@@ -15,7 +15,7 @@ before_install:
   - "export PY2=no"
   - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY2=yes; fi"
   - "git describe --always --tags"
-  - "git tags"
+  - "git tag"
 
 install:
   - "/usr/bin/yes | python setup.py install"
