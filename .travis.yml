@@ -6,9 +6,9 @@
 language: python
 
 python:
-#  - "2.7"
-  - "3.3"
-#  - "pypy"
+#  - 2.7
+#  - pypy
+  - 3.3
 
 git:
   depth: 100
@@ -20,11 +20,16 @@ before_install:
   - "git tag"
 
 install:
-  - "/usr/bin/yes | python setup.py install"
+  - pip install coverage
+  - pip install coveralls
+  - /usr/bin/yes | python setup.py install
 
 before_script:
-  - "pip install coverage"
-  - "pip freeze"
+  - pip freeze
 
 script:
-  - "nosetests -vv --with-coverage"
+  - coverage run setup.py test
+  - coverage report -m
+
+after_success:
+  - coveralls
