@@ -18,13 +18,9 @@ class FormatError(Exception):
         self.format_type = format_type
         self.msg = msg
 
-    def __repr__(self):
+    def __str__(self):
         return "On handling type {:s}, {:s}".format(
             self.format_type, self.msg)
-
-    def __str__(self):
-        return self.__repr__()
-
 
 class Seq():
     """Core class storing one sequence record.

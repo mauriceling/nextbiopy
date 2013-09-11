@@ -22,7 +22,7 @@ class TestCoreFormatError(TestCase):
         except nb.FormatError as e:
             eq_(e.format_type, 'class')
             eq_(e.msg, 'you raise it yourself')
-            eq_(repr(e), 'On handling type class, you raise it yourself')
+            eq_(str(e), 'On handling type class, you raise it yourself')
 
 
 class TestCoreClassSeqNoQual(TestCase):
