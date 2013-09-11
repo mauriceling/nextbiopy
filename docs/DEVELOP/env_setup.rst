@@ -90,6 +90,7 @@ Take `numpydoc`_ as example,
     wget https://github.com/numpy/numpydoc/archive/master.zip
     pip-3.3 install master.zip
 
+.. _build_develop_env:
 
 Build NextBiopy linked to source
 --------------------------------
