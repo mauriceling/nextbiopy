@@ -4,10 +4,12 @@
 #Note when testing Python 3, the 'python' command will invoke Python 3
 #and similarly for PyPy too.
 language: python
+
 python:
-  - "2.7"
+#  - "2.7"
   - "3.3"
-  - "pypy"
+#  - "pypy"
+
 git:
   depth: 100
 
