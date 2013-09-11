@@ -17,6 +17,8 @@ install:
   - "/usr/bin/yes | python setup.py install"
 
 before_script:
+  - "git describe --always --tags"
+  - "pip install coverage"
   - "pip freeze"
 
 script:
