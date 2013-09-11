@@ -2,6 +2,11 @@
 NextBiopy: your next bio Python library
 #######################################
 
+.. image:: https://api.travis-ci.org/nextbiopy/nextbiopy.png?branch=master,develop
+    :target: https://travis-ci.org/nextbiopy/nextbiopy
+.. image:: https://coveralls.io/repos/nextbiopy/nextbiopy/badge.png
+    :target: https://coveralls.io/r/nextbiopy/nextbiopy
+
 **Version**: |version|
 
 **Last update**: |today| 
