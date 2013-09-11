@@ -2,6 +2,11 @@
 NextBiopy
 *********
 
+.. image:: https://api.travis-ci.org/nextbiopy/nextbiopy.png?branch=master,develop
+    :target: https://travis-ci.org/nextbiopy/nextbiopy
+.. image:: https://coveralls.io/repos/nextbiopy/nextbiopy/badge.png?branch=develop
+    :target: https://coveralls.io/r/nextbiopy/nextbiopy?branch=develop
+
 Your next bio Python library.
 
 Dependencies
