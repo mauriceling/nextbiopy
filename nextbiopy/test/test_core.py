@@ -58,7 +58,7 @@ class TestCoreClassSeqWithQual(TestCase):
         self.seq.qual = 'm' * 6
 
     @raises(nb.FormatError)
-    def test_assign_inequal_quality_length_error(self):
+    def test_assign_inequal_seq_length_error(self):
         self.seq.seq = self.expected_seq[:6]
 
     @raises(nb.FormatError)
