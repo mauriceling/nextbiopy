@@ -53,6 +53,11 @@ class TestCoreClassSeqWithQual(TestCase):
     def test_seq_attr_quality_properly_set(self):
         eq_(self.seq.qual, self.expected_qual)
 
+    def test_change_quality(self):
+        new_qual = '(' * 8
+        self.seq.qual = new_qual
+        eq_(self.seq.qual, new_qual)
+
     @raises(nb.FormatError)
     def test_assign_inequal_quality_length_error(self):
         self.seq.qual = 'm' * 6
