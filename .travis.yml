@@ -8,16 +8,19 @@ python:
   - "2.7"
   - "3.3"
   - "pypy"
+git:
+  depth: 100
 
 before_install:
   - "export PY2=no"
   - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY2=yes; fi"
+  - "git describe --always --tags"
+  - "git tags"
 
 install:
   - "/usr/bin/yes | python setup.py install"
 
 before_script:
-  - "git describe --always --tags"
   - "pip install coverage"
   - "pip freeze"
 
