@@ -2,7 +2,8 @@
 Code Style
 ##########
 
-One is encouraged to read `Code Style section on Python-Guide <http://docs.python-guide.org/en/latest/writing/style/>`__ first.
+.. seealso::
+    One is encouraged to read `Code Style section on Python-Guide <http://docs.python-guide.org/en/latest/writing/style/>`__ first.
 
 We follows :pep:`8` and tries to fully conform to it.
 

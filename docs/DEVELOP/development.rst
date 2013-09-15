@@ -72,7 +72,8 @@ These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docst
 
 Usually developers are not willing to spend too much time refining their docstring, so it is welcomed to improve them!
 
-See :ref:`docstring_style` for more information.
+.. seealso::
+    :ref:`docstring_style` for more information.
 
 
 Contributing Code
@@ -104,10 +105,12 @@ So the following links will take you into the details of contributing steps.
    conventions
    release_version
 
-As a good start, `Python Guide <http://docs.python-guide.org/en/latest/>`__,
-also known as *The Hitchhiker's Guide to Python*, serves as a good practice of Python development How-To.
 
-One is highly recommended to follow this site being the first time.
+.. seealso::
+    As a good start, `Python Guide <http://docs.python-guide.org/en/latest/>`__,
+    also known as *The Hitchhiker's Guide to Python*, serves as a good practice of Python development How-To.
+
+    One is highly recommended to follow this site being the first time.
 
 FAQ
 ===

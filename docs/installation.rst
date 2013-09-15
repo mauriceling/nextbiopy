@@ -8,7 +8,7 @@ Quick Install
 
 Nextbiopy requires Python **3.3 and up**.
 
-.. note::
+.. seealso::
     If you are interested in 2.7 or earlier support,
     please **help us** and refer to this `issue <https://github.com/nextbiopy/nextbiopy/issues/1>`_.
 
@@ -37,7 +37,7 @@ use `pip`_ to install.
 .. _pip: www.pip-installer.org/
 __ https://github.com/nextbiopy/nextbiopy/archive/master.zip
 
-.. note:: 
+.. note::
     Since NextBiopy are still in early phase of development,
     currently we recommend to use :ref:`installation from git <install_git>`.
 
