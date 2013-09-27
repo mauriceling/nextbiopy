@@ -47,7 +47,7 @@ Contents
    installation
    quickstart
    tutorial
-   nextbiopy
+   API/nextbiopy
    DEVELOP/development
 
 
