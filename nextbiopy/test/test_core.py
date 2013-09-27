@@ -25,11 +25,36 @@ class TestCoreFormatError(TestCase):
             eq_(str(e), 'On handling type class, you raise it yourself')
 
 
+class TestCoreClassSeqSimple(TestCase):
+    def setUp(self):
+        self.expected_seq = 'ATCGTCGA'
+        self.seq = nb.Seq(self.expected_seq)
+
+    def test_seq_properly_set(self):
+        eq_(self.seq.seq, self.expected_seq)
+
+    def test_seq_name_nullity(self):
+        ok_(self.seq.name is None)
+
+    def test_seq_qual_nullity(self):
+        ok_(self.seq.qual is None)
+
+
 class TestCoreClassSeqNoQual(TestCase):
     def setUp(self):
         self.expected_name = 'seq_id'
         self.expected_seq = 'ATCGTCGA'
-        self.seq = nb.Seq(self.expected_name, self.expected_seq)
+        self.new_seq = 'ATCG'
+        self.seq = nb.Seq(self.expected_seq, name=self.expected_name)
+
+    def test_change_sequence(self):
+        self.seq.seq = self.new_seq
+        eq_(self.seq.seq, self.new_seq)
+
+    def test_change_sequence_using_update(self):
+        self.seq.update(self.new_seq, None)
+        eq_(self.seq.seq, self.new_seq)
+        ok_(self.seq.qual is None)
 
     def test_seq_attr_properly_set(self):
         eq_(self.seq.name, self.expected_name)
@@ -45,10 +70,14 @@ class TestCoreClassSeqWithQual(TestCase):
         self.expected_seq = 'ATCGTCGA'
         self.expected_qual = 'mmmmmmmm'
         self.seq = nb.Seq(
-            self.expected_name,
             self.expected_seq,
+            self.expected_name,
             self.expected_qual
         )
+
+    def test_repr_format(self):
+        eq_(repr(self.seq),
+            "Seq(name='seq_id', seq='ATCGTCGA', qual='mmmmmmmm')")
 
     def test_seq_attr_quality_properly_set(self):
         eq_(self.seq.qual, self.expected_qual)
@@ -56,6 +85,13 @@ class TestCoreClassSeqWithQual(TestCase):
     def test_change_quality(self):
         new_qual = '(' * 8
         self.seq.qual = new_qual
+        eq_(self.seq.qual, new_qual)
+
+    def test_update(self):
+        new_seq = 'ATCG'
+        new_qual = '))(('
+        self.seq.update(new_seq, new_qual)
+        eq_(self.seq.seq, new_seq)
         eq_(self.seq.qual, new_qual)
 
     @raises(nb.FormatError)

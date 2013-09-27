@@ -53,19 +53,29 @@ class Seq():
     --------
     Creat a sequence instance is easy.
 
-        >>> s = Seq('name', 'ATCG')
+        >>> s = Seq('ATCG')
         >>> s
-        Seq(name='name', seq='ATCG', qual=None)
+        Seq(name=None, seq='ATCG', qual=None)
 
-    Quality information is not required.
+    If ``name`` is not given, it will be set as ``None`` by default.
+
+        >>> s.name
+        None
+
+    Quality information also is not required.
     One can add it later by setting the ``qual`` attribute.
 
         >>> s.qual = "!'*("
         >>> s
-        Seq(name='name', seq='ATCG', qual="!'*(")
+        Seq(name=None, seq='ATCG', qual="!'*(")
 
-    All attributes, ``name``, ``seq`` and ``qual`` can be modified later
-    the same way we access attributes of a class.
+    All attributes, ``name``, ``seq`` and ``qual`` can be set explicitly
+    at the same time.
+
+        >>> s = Seq(name='myseq', seq='TT', qual='qq')
+
+    For changing sequence and quality simultaneously, use
+    :meth:`~nextbiopy.core.Seq.update`.
 
     An exception :exc:`~nextbiopy.core.FormatError`
     will be thrown if length of sequence and its quality are not the same.
@@ -75,18 +85,16 @@ class Seq():
             ...
         FormatError: On handling type Seq, new quality length mismatches
 
-    If you don't want to assign name for a sequence,
-    passing ``name=''`` or ``name=None`` will do
+    If quality is not given, changing sequence is simple by direct
+    attribute access.
 
-        >>> Seq('', 'ATCG')
-        Seq(name='', seq='ATCG', qual=None)
-        >>> Seq(None, 'ATCG')
-        Seq(name=None, seq='ATCG', qual=None)
+        >>> s = Seq('ATCG')
+        >>> s.seq = 'ATCATA'
 
 
     Attributes
     ----------
-    name : string
+    name : string, optional
         Name of the sequence
 
     seq : string
@@ -104,13 +112,13 @@ class Seq():
     """
     __slots__ = ['name', '_seq', '_qual']
 
-    def __init__(self, name, seq, qual=None):
-        """ Create an instance of a sequence record.
+    def __init__(self, seq, name=None, qual=None):
+        """Create an instance of a sequence record.
 
         Parameters
         ----------
-        name : string
         seq : string
+        name : string, optional
         qual : string, optional
 
         Raises
@@ -127,8 +135,33 @@ class Seq():
            O’Reilly Media, Inc.
         """
         self.name = name
-        self._qual = qual
-        self.seq = seq
+        self.update(seq, qual)
+
+    def update(self, new_seq, new_qual=None):
+        """Modify both ``seq`` and ``qual`` together.
+
+        Parameters
+        ----------
+        new_seq : string
+        new_qual : string, optional
+
+        Raises
+        ------
+        FormatError
+            If length of sequence and quality are not same.
+
+        Examples
+        --------
+
+            >>> s = Seq('ATA', '> <')
+            >>> s.update('GCTA', '))((')
+            >>> s
+            Seq(name='myseq', seq='GCTA', qual="))((")
+
+        """
+        Seq._validate(new_seq, new_qual)
+        self._seq = new_seq
+        self._qual = new_qual
 
     @property
     def seq(self):
@@ -138,11 +171,8 @@ class Seq():
     def seq(self, new_seq):
         if self._qual is None:
             self._seq = new_seq
-        elif len(self._qual) == len(new_seq):
-            self._seq = new_seq
         else:
-            raise FormatError(
-                'Seq', 'new sequence length mismatches')
+            self.update(new_seq, self.qual)
 
     @property
     def qual(self):
@@ -150,11 +180,12 @@ class Seq():
 
     @qual.setter
     def qual(self, new_qual):
-        if len(self._seq) == len(new_qual):
-            self._qual = new_qual
-        else:
-            raise FormatError(
-                'Seq', 'new quality length mismatches')
+        self.update(self.seq, new_qual)
+
+    @classmethod
+    def _validate(cls, new_seq, new_qual):
+        if new_qual is not None and len(new_seq) != len(new_qual):
+            raise FormatError(cls, 'seq and qual length mismatch')
 
     def __repr__(self):
         return "Seq(name={:s}, seq={:s}, qual={:s})".format(
