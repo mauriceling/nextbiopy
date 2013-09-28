@@ -25,7 +25,7 @@ class Seq():
     """Core class storing one sequence record.
 
     This class is the base class storing information about sequences.
-    For example, a FASTA file contains mutliple sequence record::
+    For example, a FASTA [1]_ file contains mutliple sequence record::
 
         >name of the sequence
         ATCGATCGATCGATCG
@@ -33,7 +33,8 @@ class Seq():
         GCTAGCTAGCTA
 
     It contains 2 records of sequence. In fasta, each sequence record
-    has a name and sequence itself. While for FASTQ file, a seqeunce record has
+    has a name and sequence itself.
+    While for FASTQ [2]_ file, a seqeunce record has
     an additional information **quality**::
 
         @SEQ_ID
@@ -98,37 +99,27 @@ class Seq():
     qual : string, optional
         Quality information
 
+    Raises
+    ------
+    FormatError
+        If length of sequence and quality are not same.
+
+    Notes
+    -----
+    By denoting ``__slots__``, user cannot add new attribute to
+    instances. However, the memory use reduces. [3]_
+
 
     References
     ----------
     .. [1] http://en.wikipedia.org/wiki/FASTA_format
     .. [2] http://en.wikipedia.org/wiki/FASTQ_format
-
+    .. [3] Python Cookbook 3rd, David Beazley and Brian Jones,
+           O’Reilly Media, Inc.
     """
     __slots__ = ['name', '_seq', '_qual']
 
     def __init__(self, seq, name=None, qual=None):
-        """Create an instance of a sequence record.
-
-        Parameters
-        ----------
-        seq : string
-        name : string, optional
-        qual : string, optional
-
-        Raises
-        ------
-        FormatError
-            If length of sequence and quality are not same.
-
-        Notes
-        -----
-        By denoting ``__slots__``, user cannot add new attribute to
-        instances. However, the memory use reduces. [3]_
-
-        .. [3] Python Cookbook 3rd, David Beazley and Brian Jones,
-           O’Reilly Media, Inc.
-        """
         self.name = name
         self.update(seq, qual)
 
