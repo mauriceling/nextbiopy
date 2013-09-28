@@ -57,8 +57,7 @@ class TestFastaWrite(TestCase):
 
     @raises(NotImplementedError)
     def test_expect_implementation_error(self):
-        for seq in self.fa:
-            pass
+        iter(self.fa)
 
 class TestFastaAppend(TestCase):
     def setUp(self):
@@ -70,8 +69,7 @@ class TestFastaAppend(TestCase):
 
     @raises(NotImplementedError)
     def test_expect_implementation_error(self):
-        for seq in self.fa:
-            pass
+        iter(self.fa)
 
     def test_correct_content_append(self):
         with Fasta(self.temp_fasta.name) as read_fa:
