@@ -1,13 +1,13 @@
-:mod:`nextbiopy` Package API
-----------------------------
+Package API
+-----------
 
-.. automodule:: nextbiopy.__init__
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. automodule:: nextbiopy
+    :special-members: init
 
 .. toctree::
    :maxdepth: 3
 
+   basic
+   nextbiopy.io
    nextbiopy.core
 
