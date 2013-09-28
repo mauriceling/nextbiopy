@@ -6,8 +6,7 @@
 
 .. autoclass:: Fasta
     :members:
-    :private-members: _gen_seq
     :special-members: init
     :exclude-members: __weakref__
-    
+
 

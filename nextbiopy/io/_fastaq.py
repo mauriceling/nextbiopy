@@ -1,7 +1,78 @@
 from nextbiopy import Seq
 
 class Fasta():
-    """Fasta file representataion."""
+    """Fasta file representataion.
+
+    This class handles the I/O between FASTA file. Normally FASTA has two
+    possible forms::
+
+        >name of the sequence
+        ATCGATCGATCGATCG
+        >another sequence
+        GCTAGCTAGCTA
+
+    This type of FASTA is referred as **single line** FASTA, since for
+    each record, sequence takes only one line (``\\n``).
+
+    On the other hand, another type of FASTA is referred as **multiline**
+    FASTA, which has the form::
+
+        >name of the sequence
+        ATCGATCGATCGATCGATCGATAGCATAT...
+        TCGATATACGGGATACGAGACCAAATATT...
+        ...
+        ATATC
+        >another sequence
+        TCGAGATACGAGC...
+
+    some record can have sequence spanning over multiple lines.
+
+    Both types can be read by
+
+        >>> fasta = Fasta('path/to/fasta')
+        >>> next(fasta)
+        Seq(name='name of the sequence', seq='ATCG...ATCG', qual=None)
+
+    So the instance is *iterable* in **read** (``r``) mode,
+    record will be return as :class:`~nextbiopy.Seq` instances.
+
+    By default ``multiline`` is assumed. However, if it is a single line
+    FASTA, the parsing speed will be **boosted** significantly.
+    So if one knows how the FASTA file actually looks like
+    (try ``head some.fasta`` for a quick look),
+    it is always encouraged to set ``multiline=False``.
+
+    Examples
+    --------
+
+    Reading a single line Fasta file on a for loop.
+
+        >>> fasta = Fasta('path/to/single_line.fasta', multiline=False)
+        >>> for seq in fasta:
+        ...     pass
+
+    Count number of total records.
+
+        >>> sum(1 for seq in fasta)
+
+    Combined with content manager
+
+        >>> with Fasta('path/to/single_line.fasta', multiline=False) as fa:
+        ...     for seq in fa:
+        ...         pass
+
+    Attributes
+    ----------
+
+    mode : {'r', 'w', 'a'}
+
+        FASTA File mode, by default it reads an external fasta file. The
+        meaning of mode is same as built-in :class:`file` mode, and is
+        passed to it internally.
+
+    multiline : True
+
+    """
     def __init__(self, fasta_path, mode='r', multiline=True):
         self.multiline = multiline
         if mode not in ['r', 'w', 'a']:   # TODO:  ['w', 'a']
