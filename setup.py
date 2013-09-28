@@ -56,7 +56,7 @@ if sys.version_info < (3, 3):
 #-----------------------------------------------------------------------------
 MAJOR = 0
 MINOR = 0
-MICRO = 1
+MICRO = 2
 ISRELEASED = False
 VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 QUALIFIER = ''       # something like rc1, rc2
