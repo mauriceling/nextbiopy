@@ -2,4 +2,4 @@
 
 '''
 from nextbiopy._version import __version__
-from nextbiopy.core import Seq, FormatError
+from nextbiopy.core.base import Seq, FormatError

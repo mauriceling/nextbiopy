@@ -19,16 +19,13 @@ class FormatError(Exception):
         self.msg = msg
 
     def __str__(self):
-        return "On handling type {:s}, {:s}".format(
-            self.format_type, self.msg)
+        return "On handling type {0.format_type}, {0.msg}".format(self)
 
 class Seq():
     """Core class storing one sequence record.
 
     This class is the base class storing information about sequences.
-    For example, a FASTA file contains mutliple sequence record.
-
-    .. code-block:: none
+    For example, a FASTA file contains mutliple sequence record::
 
         >name of the sequence
         ATCGATCGATCGATCG
@@ -37,9 +34,7 @@ class Seq():
 
     It contains 2 records of sequence. In fasta, each sequence record
     has a name and sequence itself. While for FASTQ file, a seqeunce record has
-    an additional information **quality**.
-
-    .. code-block:: none
+    an additional information **quality**::
 
         @SEQ_ID
         GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
@@ -47,7 +42,7 @@ class Seq():
         !''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
 
     Nextbiopy internally store these seqeuence records using this class
-    :class:`~!nextbiopy.core.Seq`
+    :class:`~!nextbiopy.Seq`
 
     Examples
     --------
@@ -75,9 +70,9 @@ class Seq():
         >>> s = Seq(name='myseq', seq='TT', qual='qq')
 
     For changing sequence and quality simultaneously, use
-    :meth:`~nextbiopy.core.Seq.update`.
+    :meth:`~nextbiopy.Seq.update`.
 
-    An exception :exc:`~nextbiopy.core.FormatError`
+    An exception :exc:`~nextbiopy.FormatError`
     will be thrown if length of sequence and its quality are not the same.
 
         >>> s.qual = "!!"       # len(s.seq) is 4
@@ -188,8 +183,6 @@ class Seq():
             raise FormatError(cls, 'seq and qual length mismatch')
 
     def __repr__(self):
-        return "Seq(name={:s}, seq={:s}, qual={:s})".format(
-            repr(self.name),
-            repr(self.seq),
-            repr(self.qual)
+        return (
+            "Seq(name={0.name!r}, seq={0.seq!r}, qual={0.qual!r})".format(self)
         )

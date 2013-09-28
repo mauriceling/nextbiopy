@@ -173,7 +173,11 @@ setup_kwargs["test_suite"] = "nose.collector"
 #-----------------------------------------------------------------------------
 setup(
     name='nextbiopy',
-    packages=['nextbiopy'],
+    packages=[
+        'nextbiopy',
+        'nextbiopy.core',
+        'nextbiopy.io',
+    ],
     package_data={
         # If any package contains *.txt or *.rst files, include them:
         '': ['*.txt', '*.rst'],

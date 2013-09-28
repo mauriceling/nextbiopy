@@ -3,12 +3,12 @@ from nose.tools import ok_, eq_, raises
 import nextbiopy as nb
 
 def test_core_class_lifted():
-    ok_(nb.Seq is nb.core.Seq, "class Seq not lifted to module root")
-    ok_(nb.FormatError is nb.core.FormatError,
+    ok_(nb.Seq is nb.core.base.Seq, "class Seq not lifted to module root")
+    ok_(nb.FormatError is nb.core.base.FormatError,
         "exception FormatError not lifted to module root")
 
 
-class TestCoreFormatError(TestCase):
+class TestFormatError(TestCase):
     def test_simple_raise_formaterror(self):
         try:
             raise nb.FormatError()
@@ -25,7 +25,7 @@ class TestCoreFormatError(TestCase):
             eq_(str(e), 'On handling type class, you raise it yourself')
 
 
-class TestCoreClassSeqSimple(TestCase):
+class TestClassSeqSimple(TestCase):
     def setUp(self):
         self.expected_seq = 'ATCGTCGA'
         self.seq = nb.Seq(self.expected_seq)
@@ -40,7 +40,7 @@ class TestCoreClassSeqSimple(TestCase):
         ok_(self.seq.qual is None)
 
 
-class TestCoreClassSeqNoQual(TestCase):
+class TestClassSeqNoQual(TestCase):
     def setUp(self):
         self.expected_name = 'seq_id'
         self.expected_seq = 'ATCGTCGA'
@@ -64,7 +64,7 @@ class TestCoreClassSeqNoQual(TestCase):
         ok_(self.seq.qual is None)
 
 
-class TestCoreClassSeqWithQual(TestCase):
+class TestClassSeqWithQual(TestCase):
     def setUp(self):
         self.expected_name = 'seq_id'
         self.expected_seq = 'ATCGTCGA'
