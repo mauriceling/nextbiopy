@@ -104,6 +104,7 @@ So the following links will take you into the details of contributing steps.
    testing
    conventions
    release_version
+   git_usage
 
 
 .. seealso::
