@@ -14,12 +14,13 @@ Dependencies
 
 NextBiopy depends on the following packages:
 
-- `Numpy`_
+- `NumPy`_
 - `pandas`_
+- `matplotlib`_
 
-.. _Numpy: http://www.numpy.org/
+.. _NumPy: http://www.numpy.org/
 .. _pandas: http://pandas.pydata.org/
-
+.. _matplotlib: http://matplotlib.org/
 
 Installation
 ============
