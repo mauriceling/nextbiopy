@@ -35,7 +35,7 @@ Docs of this part are stored in ``/docs``, the quickest way to pick up is by rea
 
 **API Doc**
 
-These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docstring#Python>`__ inside code. For example, API doc for :class:`~nextbiopy.core.Seq` is generated from the docstring of :class:`~!nextbiopy.core.Seq` itself.
+These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docstring#Python>`__ inside code. For example, API doc for :class:`~nextbiopy.Seq` is generated from the docstring of :class:`~!nextbiopy.Seq` itself.
 
 .. code-block:: python3
 
