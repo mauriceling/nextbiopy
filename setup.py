@@ -177,6 +177,7 @@ setup(
         'nextbiopy',
         'nextbiopy.core',
         'nextbiopy.io',
+        'nextbiopy.util',
     ],
     package_data={
         # If any package contains *.txt or *.rst files, include them:
