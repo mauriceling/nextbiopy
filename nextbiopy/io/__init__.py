@@ -9,5 +9,6 @@ Currently it supports the following file types.
 +------------------------------------------+------+-------+------------------+
 
 """
-# flake8: noqa
-from nextbiopy.io._fastaq import Fasta
+
+#flake8: noqa
+from nextbiopy.io.api import *
