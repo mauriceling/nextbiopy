@@ -1,7 +1,7 @@
 from unittest import TestCase
 from nose.tools import ok_, eq_, raises, assert_raises
 import nextbiopy as nb
-from nextbiopy.io import Fasta
+from nextbiopy.io import Fasta, read_fasta
 import os
 
 TEST_FASTA = os.path.join(
@@ -29,7 +29,9 @@ class TestFastaRead(TestCase):
     def setUp(self):
         self.fa_list = [
             Fasta(TEST_FASTA, multiline=False),
-            Fasta(MULTILINE_FASTA)
+            Fasta(MULTILINE_FASTA),
+            read_fasta(TEST_FASTA, multiline=False),
+            read_fasta(MULTILINE_FASTA)
         ]
 
     def test_gen_seq(self):
