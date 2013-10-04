@@ -4,6 +4,8 @@
 .. automodule:: nextbiopy.io
     :special-members: init
 
+.. autofunction:: read_fasta
+
 .. autoclass:: Fasta
     :members:
     :special-members: init
