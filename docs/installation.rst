@@ -6,12 +6,7 @@ Installation
 Quick Install
 =============
 
-Nextbiopy requires Python **3.3 and up**.
-
-.. seealso::
-    If you are interested in 2.7 or earlier support,
-    please **help us** and refer to this `issue <https://github.com/nextbiopy/nextbiopy/issues/1>`_.
-
+Nextbiopy requires **Python 3.3+, 2.7, or pypy 1.9**.
 
 From PyPI
 ---------
