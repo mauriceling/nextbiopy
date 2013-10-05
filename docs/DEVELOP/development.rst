@@ -108,7 +108,7 @@ So the following links will take you into the details of contributing steps.
    code_style
    doc_string_style
    testing
-   conventions
+   compatibility
    release_version
    git_usage
 
