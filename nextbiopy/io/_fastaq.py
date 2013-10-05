@@ -1,7 +1,24 @@
 from nextbiopy import Seq
 
 def read_fasta(file_path, multiline=True):
-    """FASTA parser returns generator of :class:`~nextbiopy.Seq` records."""
+    """FASTA parser returns generator of :class:`~nextbiopy.Seq` records.
+
+    Parameters
+    ----------
+    file_path : string
+        path to the FASTA file, passed to :func:`open()` internally
+
+    multiline : bool, True
+        whether a sequence record can span over multiple lines
+
+    Examples
+    --------
+
+        >>> gen_seq = nb.io.read_fasta('/path/to/your.fasta', multiline=False)
+        >>> for seq in gen_seq:
+        ...     print(seq)
+
+    """
     with open(file_path, 'r') as fa:
         if multiline:
             # if a record spans over two lines, then whether a record ends
@@ -27,11 +44,52 @@ def read_fasta(file_path, multiline=True):
                 yield Seq(name=line_id[1:-1], seq=line_seq[:-1])
 
 def read_fastq(file_path, multiline=True):
-    """FASTQ parser returns generator of :class:`~nextbiopy.Seq` records."""
+    """FASTQ parser returns generator of :class:`~nextbiopy.Seq` records.
+
+    Parameters
+    ----------
+    file_path : string
+        path to the FASTA file, passed to :func:`open()` internally
+
+    multiline : bool, True
+        whether a sequence record can span over multiple lines
+
+    Examples
+    --------
+
+        >>> gen_seq = nb.io.read_fastq('/path/to/your.fastq', multiline=False)
+        >>> for seq in gen_seq:
+        ...     print(len(seq.qual))
+
+    """
     with open(file_path, 'r') as fq:
         if multiline:
-            # TODO: multiline FASTQ parser
-            yield None
+            seq_id = None
+            seq_part = None
+            qual_part = None
+            state = 'i'  # i: initial, s: seq, q: quality
+            for line in fq:
+                if line.startswith('@'):
+                    if state != 'i':
+                        yield Seq(
+                            name=seq_id,
+                            seq=''.join(seq_part),
+                            qual=''.join(qual_part)
+                        )
+
+                    seq_id = line[1:-1]
+                    seq_part = []
+                    qual_part = []
+                    state = 's'
+                elif line.startswith('+'):
+                    state = 'q'
+                    continue
+                elif state == 's':
+                    seq_part.append(line[:-1])
+                else:
+                    qual_part.append(line[:-1])
+            yield Seq(name=seq_id, seq=''.join(seq_part), qual=''.join(qual_part))
+
         else:
             for line_id, line_seq, _, line_qual in zip(*[iter(fq)] * 4):
                 yield Seq(name=line_id[1:-1],
@@ -145,6 +203,32 @@ class Fasta:
 
 class Fastq(Fasta):
     """FASTQ file representation
+
+    All operations are similar to :class:`~nextbiopy.io.Fasta`, but the file
+    format is slightly different::
+
+        @name of the sequence
+        ATCGATCGATCGATC
+        +
+        \QAQ/\QAQ/\QAQ/
+        @another sequence
+        GCTAGCTAGCTA
+        +
+        !!(> <)!!QAQ
+
+    Fastq can be also stored in multiline manner.
+
+    Examples
+    --------
+
+    Same usage as :class:`~nextbiopy.io.Fasta`.
+
+    Attributes
+    ----------
+
+    mode : {'r', 'w', 'a'}
+    multiline : True
+
     """
     def _gen_seq(self):
         yield from read_fastq(self.file_path, self.multiline)

@@ -16,7 +16,7 @@ class TestFastqRead(TestCase):
     def setUp(self):
         self.fq_list = [
             Fastq(TEST_FASTQ, multiline=False),
-            # Fastq(MULTILINE_FASTQ)
+            Fastq(MULTILINE_FASTQ)
         ]
 
     def test_seq_content(self):
