@@ -207,7 +207,8 @@ class Fasta:
         else:
             raise NotImplementedError('Not in read mode')
 
-    def __next__(self):
+    #def _next__(self):
+    def next(self):
         return next(self._seq_generator)
 
     def _gen_seq(self):
