@@ -58,15 +58,21 @@ These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docst
         ... (trimmed) ...
         """
 
-        def __init__(self, name, seq, qual=None):
-            """ Create an instance of a sequence record.
+        def update(self, new_seq, new_qual=None):
+            """Modify both ``seq`` and ``qual`` together.
 
             Parameters
             ----------
-            name : string
-            seq : string
-            qual : string, optional
+            new_seq : string
+            new_qual : string, optional
 
+            Raises
+            ------
+            FormatError
+                If length of sequence and quality are not same.
+
+            Examples
+            --------
             ... (trimmed) ...
             """
 
