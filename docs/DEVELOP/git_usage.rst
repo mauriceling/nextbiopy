@@ -34,7 +34,7 @@ Git Branching
 
 There are two main branches:
 
-- ``master``: for stable code release
+- ``master``: for stable code release, **never** code in this branch!
 - ``develop``: for development
 
 For normal user, use code on ``master``; for developer, use code on ``develop``.
