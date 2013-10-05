@@ -56,7 +56,7 @@ Please help this issue:
 #-----------------------------------------------------------------------------
 MAJOR = 0
 MINOR = 0
-MICRO = 2
+MICRO = 3
 ISRELEASED = False
 VERSION = '%d.%d.%d' % (MAJOR, MINOR, MICRO)
 QUALIFIER = ''       # something like rc1, rc2
