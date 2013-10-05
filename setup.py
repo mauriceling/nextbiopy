@@ -40,15 +40,13 @@ except ImportError:
 from setuptools import setup
 
 # Python version check, currently supports 3.3 and up
-PYTHON_2_MSG = """\
-Require Python 3.3 and up, currently 2.x not supported.
-However, we are planned to port it back to 2.7 and we are asking for HELP!
-Please help this issue:
-    https://github.com/nextbiopy/nextbiopy/issues/1
+OLD_PYTHON_MSG = """\
+Require Python 3.3+ or 2.7, currently 2.x - 2.6 not supported.
+Please use newer Python.
 """
 
-#if sys.version_info < (3, 3):
-#    sys.exit(PYTHON_2_MSG)
+if sys.version_info < (2, 7):
+    sys.exit(OLD_PYTHON_MSG)
 
 
 #-----------------------------------------------------------------------------
@@ -83,6 +81,7 @@ CLASSIFIERS = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python',
+    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3.3',
     'Operating System :: OS Independent',
     'Intended Audience :: Science/Research'
