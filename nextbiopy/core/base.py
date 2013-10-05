@@ -115,7 +115,7 @@ class Seq():
     .. [1] http://en.wikipedia.org/wiki/FASTA_format
     .. [2] http://en.wikipedia.org/wiki/FASTQ_format
     .. [3] Python Cookbook 3rd, David Beazley and Brian Jones,
-           O’Reilly Media, Inc.
+           O'Reilly Media, Inc.
     """
     __slots__ = ['name', '_seq', '_qual']
 
