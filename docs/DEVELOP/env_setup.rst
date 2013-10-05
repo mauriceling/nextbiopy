@@ -16,6 +16,7 @@ Besides mentioned in :ref:`Prequisites for Installation <dependencies>`, extra p
 **Virtual Enviroment**
 
 - `virtualenv`_
+- `virtualenvwrapper`_ *(optional)*
 
 **Testing**
 
@@ -40,6 +41,7 @@ Besides mentioned in :ref:`Prequisites for Installation <dependencies>`, extra p
 .. _flake8: http://flake8.readthedocs.org/en/2.0/
 
 .. _virtualenv: http://www.virtualenv.org/
+.. _virtualenvwrapper: http://virtualenvwrapper.readthedocs.org/
 
 .. _nose: http://nose.readthedocs.org/
 .. _coverage: https://pypi.python.org/pypi/coverage
@@ -107,6 +109,45 @@ so it reflects the code change after reloading it.
 
 .. note:: version number won't change unless you trigger ``setup.py`` again.
 
+
+Manage Virtualenv Environemnt by ``virtualenvwrapper``
+------------------------------------------------------
+
+Managing multiple environments is not easy. ``virtualenvwrapper`` helps to do this job.
+
+For supporting Python 3.x, after the installaion, one should add environemnt variable to the shell as follows::
+
+    # For virtualenvwrapper settings
+    export WORKON_HOME=$HOME/MyEnvs
+    export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3.3
+    export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv-3.3
+    source /usr/local/bin/virtualenvwrapper_lazy.sh
+
+They could be placed in somewhere like ``~/.bash_profile`` or ``~/.zshrc``, which path to Python 3.x and virtualenv should be properly set. For more configuration please visit their official site.
+
+Usage is easy. Make a new virtualenv is easy.
+
+.. code-block:: bash
+
+    mkvirtualenv nextbiopy-devel
+
+Options to virtualenv can be passed in the same way.
+
+.. code-block:: bash
+
+    mkvirtualenv -p /usr/local/bin/python2.7 nextbiopy-27
+
+Enter a virtual environment at any location
+
+.. code-block:: bash
+
+    workon nextbiopy-devel
+
+Leave the virtual environment in the same way.
+
+.. code-block:: bash
+
+    deactivate
 
 Test the Environment Setup
 ==========================
