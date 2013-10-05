@@ -21,7 +21,7 @@ class FormatError(Exception):
     def __str__(self):
         return "On handling type {0.format_type}, {0.msg}".format(self)
 
-class Seq():
+class Seq(object):
     """Core class storing one sequence record.
 
     This class is the base class storing information about sequences.
