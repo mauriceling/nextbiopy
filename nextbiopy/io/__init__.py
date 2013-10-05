@@ -7,7 +7,9 @@ Currently it supports the following file types.
 +==========================================+======+=======+==================+
 | FASTA (:class:`~nextbiopy.io.Fasta`)     | Y    | N     |                  |
 +------------------------------------------+------+-------+------------------+
-
+| FASTQ (:class:`~nextbiopy.io.Fastq`)     | Y    | N     |                  |
++------------------------------------------+------+-------+------------------+
 """
-# flake8: noqa
-from nextbiopy.io._fastaq import Fasta
+
+#flake8: noqa
+from nextbiopy.io.api import *

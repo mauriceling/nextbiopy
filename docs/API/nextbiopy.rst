@@ -10,4 +10,4 @@ Package API
    basic
    nextbiopy.io
    nextbiopy.core
-
+   nextbiopy.util

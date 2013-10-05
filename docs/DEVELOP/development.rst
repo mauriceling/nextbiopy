@@ -35,7 +35,7 @@ Docs of this part are stored in ``/docs``, the quickest way to pick up is by rea
 
 **API Doc**
 
-These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docstring#Python>`__ inside code. For example, API doc for :class:`~nextbiopy.core.Seq` is generated from the docstring of :class:`~!nextbiopy.core.Seq` itself.
+These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docstring#Python>`__ inside code. For example, API doc for :class:`~nextbiopy.Seq` is generated from the docstring of :class:`~!nextbiopy.Seq` itself.
 
 .. code-block:: python3
 
@@ -58,15 +58,21 @@ These docs are generated from the `docstring <http://en.wikipedia.org/wiki/Docst
         ... (trimmed) ...
         """
 
-        def __init__(self, name, seq, qual=None):
-            """ Create an instance of a sequence record.
+        def update(self, new_seq, new_qual=None):
+            """Modify both ``seq`` and ``qual`` together.
 
             Parameters
             ----------
-            name : string
-            seq : string
-            qual : string, optional
+            new_seq : string
+            new_qual : string, optional
 
+            Raises
+            ------
+            FormatError
+                If length of sequence and quality are not same.
+
+            Examples
+            --------
             ... (trimmed) ...
             """
 
@@ -104,6 +110,7 @@ So the following links will take you into the details of contributing steps.
    testing
    conventions
    release_version
+   git_usage
 
 
 .. seealso::
