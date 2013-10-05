@@ -14,7 +14,7 @@ def read_fasta(file_path, multiline=True):
     Examples
     --------
 
-        >>> gen_seq = nb.io.read_fasta('/path/to/your.fasta', multiline=False)
+        >>> gen_seq = read_fasta('/path/to/your.fasta', multiline=False)
         >>> for seq in gen_seq:
         ...     print(seq)
 
@@ -57,7 +57,7 @@ def read_fastq(file_path, multiline=True):
     Examples
     --------
 
-        >>> gen_seq = nb.io.read_fastq('/path/to/your.fastq', multiline=False)
+        >>> gen_seq = read_fastq('/path/to/your.fastq', multiline=False)
         >>> for seq in gen_seq:
         ...     print(len(seq.qual))
 
@@ -70,13 +70,21 @@ def read_fastq(file_path, multiline=True):
             state = 'i'  # i: initial, s: seq, q: quality
             for line in fq:
                 if line.startswith('@'):
-                    if state != 'i':
-                        yield Seq(
-                            name=seq_id,
-                            seq=''.join(seq_part),
-                            qual=''.join(qual_part)
-                        )
-
+                    if state == 'i':
+                        pass  # first run
+                    elif state == 'q':
+                        seq = ''.join(seq_part)
+                        qual = ''.join(qual_part)
+                        if len(qual) < len(seq):
+                            # a quality starts with @
+                            qual_part.append(line[:-1])
+                            continue
+                        else:
+                            yield Seq(
+                                name=seq_id,
+                                seq=seq,
+                                qual=qual
+                            )
                     seq_id = line[1:-1]
                     seq_part = []
                     qual_part = []
@@ -88,8 +96,12 @@ def read_fastq(file_path, multiline=True):
                     seq_part.append(line[:-1])
                 else:
                     qual_part.append(line[:-1])
-            yield Seq(name=seq_id, seq=''.join(seq_part), qual=''.join(qual_part))
 
+            yield Seq(
+                name=seq_id,
+                seq=''.join(seq_part),
+                qual=''.join(qual_part)
+            )
         else:
             for line_id, line_seq, _, line_qual in zip(*[iter(fq)] * 4):
                 yield Seq(name=line_id[1:-1],

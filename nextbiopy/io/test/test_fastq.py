@@ -28,5 +28,5 @@ class TestFastqRead(TestCase):
             seq = next(fq)
             eq_(seq.name, 'seq2')
             eq_(seq.seq, 'GCTA' * 4)
-            eq_(seq.qual, '>///< $$$$ >///<')
+            eq_(seq.qual, '@@> < $$$$ >///<')
             assert_raises(StopIteration, next, fq)
