@@ -1,5 +1,4 @@
 from nextbiopy import Seq
-from nextbiopy.compat import PY2
 
 def read_fasta(file_path, multiline=True):
     """FASTA parser returns generator of :class:`~nextbiopy.Seq` records.
@@ -105,9 +104,11 @@ def read_fastq(file_path, multiline=True):
             )
         else:
             for line_id, line_seq, _, line_qual in zip(*[iter(fq)] * 4):
-                yield Seq(name=line_id[1:-1],
-                          seq=line_seq[:-1],
-                          qual=line_qual[:-1])
+                yield Seq(
+                    name=line_id[1:-1],
+                    seq=line_seq[:-1],
+                    qual=line_qual[:-1]
+                )
 
 
 class Fasta:
@@ -189,12 +190,18 @@ class Fasta:
         if mode not in ['r', 'w', 'a']:   # TODO:  ['w', 'a']
             raise TypeError("Unsupported mode type")
         self._mode = mode
+        self._setup_by_mode()
+
+    def _setup_by_mode(self):
         if self._mode == 'r':
-            self._seq_generator = self._gen_seq()
-        elif mode == 'w':
+            self._mode_read()
+        elif self._mode == 'w':
             pass
-        elif mode == 'a':
+        elif self._mode == 'a':
             pass
+
+    def _mode_read(self):
+        self._seq_generator = read_fasta(self.file_path, self.multiline)
 
     def __enter__(self):
         return self
@@ -214,12 +221,6 @@ class Fasta:
     def next(self):
         return self.__next__()
 
-    def _gen_seq(self):
-        if PY2:
-            for s in read_fasta(self.file_path, self.multiline):
-                yield s
-        else:
-            yield from read_fasta(self.file_path, self.multiline)
 
 class Fastq(Fasta):
     """FASTQ file representation
@@ -250,9 +251,6 @@ class Fastq(Fasta):
     multiline : True
 
     """
-    def _gen_seq(self):
-        if PY2:
-            for s in read_fastq(self.file_path, self.multiline):
-                yield s
-        else:
-            yield from read_fastq(self.file_path, self.multiline)
+    def _mode_read(self):
+        self._seq_generator = read_fastq(self.file_path, self.multiline)
+
