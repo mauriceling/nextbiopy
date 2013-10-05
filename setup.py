@@ -47,8 +47,8 @@ Please help this issue:
     https://github.com/nextbiopy/nextbiopy/issues/1
 """
 
-if sys.version_info < (3, 3):
-    sys.exit(PYTHON_2_MSG)
+#if sys.version_info < (3, 3):
+#    sys.exit(PYTHON_2_MSG)
 
 
 #-----------------------------------------------------------------------------

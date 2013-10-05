@@ -210,8 +210,13 @@ class Fasta:
     def __next__(self):
         return next(self._seq_generator)
 
+    def next(self):
+        return next(self._seq_generator)
+
     def _gen_seq(self):
-        yield from read_fasta(self.file_path, self.multiline)
+        for s in read_fasta(self.file_path, self.multiline):
+            yield s
+        #yield from read_fasta(self.file_path, self.multiline)
 
 class Fastq(Fasta):
     """FASTQ file representation
@@ -243,4 +248,6 @@ class Fastq(Fasta):
 
     """
     def _gen_seq(self):
-        yield from read_fastq(self.file_path, self.multiline)
+        for s in read_fastq(self.file_path, self.multiline):
+            yield s
+        #yield from read_fastq(self.file_path, self.multiline)
