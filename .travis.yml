@@ -32,7 +32,7 @@ before_script:
   - pip freeze
 
 script:
-  - nosetests-3.3 -v --with-coverage --cover-erase --cover-package=nextbiopy
+  - nosetests -v --with-coverage --cover-erase --cover-package=nextbiopy
 
 after_success:
   - coveralls
