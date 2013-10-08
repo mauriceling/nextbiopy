@@ -2,7 +2,7 @@
 #See http://travis-ci.org/ for details
 #
 #Note when testing Python 3, the 'python' command will invoke Python 3
-#and similarly for PyPy too.
+#and same as pypy too.
 language: python
 
 python:
@@ -13,23 +13,26 @@ python:
 git:
   depth: 100
 
+virtualenv:
+  system_site_packages: true
+
 before_install:
-  - "export PY2=no"
-  - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY2=yes; fi"
-  - "git describe --always --tags"
-  - "git tag"
+  - export PY2=no
+  - if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY2=yes; fi
+# for debuging, shows version tag
+#  - git describe --always --tags
+#  - git tag
+  - pip install coverage --use-mirrors
+  - pip install coveralls --use-mirrors
 
 install:
-  - pip install coverage
-  - pip install coveralls
   - /usr/bin/yes | python setup.py install
 
 before_script:
   - pip freeze
 
 script:
-  - coverage run setup.py test
-  - coverage report -m
+  - nosetests-3.3 -v --with-coverage --cover-erase --cover-package=nextbiopy
 
 after_success:
   - coveralls
