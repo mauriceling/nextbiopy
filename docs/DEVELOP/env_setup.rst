@@ -52,7 +52,7 @@ Besides mentioned in :ref:`Prequisites for Installation <dependencies>`, extra p
 .. __: numpydoc_
 
 
-Build up the Environemnt
+Build up the Environment
 ========================
 
 It is recommended to create a **virtual environment**, usually set by `virtualenv`_.
