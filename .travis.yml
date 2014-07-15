@@ -8,16 +8,7 @@ language: python
 python:
 #  - 2.7
 #  - pypy
-  - 3.3
-
-git:
-  depth: 100
-
-before_install:
-  - "export PY2=no"
-  - "if [[ $TRAVIS_PYTHON_VERSION == '2.7' ]]; then export PY2=yes; fi"
-  - "git describe --always --tags"
-  - "git tag"
+  - 3.4
 
 install:
   - pip install coverage

@@ -1,18 +1,30 @@
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
+import re
 
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'DESCRIPTION.rst'), encoding='utf-8') as f:
     LONG_DESC = f.read()
 
-with open(path.join(here, 'VERSION'), encoding='utf-8') as f:
-    VERSION = f.read().strip()
+def read(*parts):
+    # intentionally *not* adding an encoding option to open
+    # see https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
+    return open(path.join(here, *parts), 'r').read()
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
+                              version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError("Unable to find version string.")
+
 
 setup(
     name='nextbiopy',
-    version=VERSION,
+    version=find_version('nextbiopy', '__init__.py'),
 
     license='MIT',
     description='Next bio python library',

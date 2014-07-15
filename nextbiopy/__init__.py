@@ -2,7 +2,8 @@
 
 '''
 # flake8: noqa
-from nextbiopy._version import __version__
 from nextbiopy.core.api import *
 from nextbiopy import io
 from nextbiopy import util
+
+__version__ = '0.0.4'

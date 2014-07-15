@@ -35,8 +35,5 @@ nosetests.xml
 # Translations
 *.mo
 
-# verion file
-_version.py
-
 # built document files
 docs/_build
