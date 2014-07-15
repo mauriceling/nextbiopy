@@ -25,7 +25,7 @@ NextBiopy depends on the following packages:
 Installation
 ============
 
-Nextbiopy requires Python 3.3 and up. 
+Nextbiopy requires Python 3.3 and up.
 
 If you are interested in 2.7 or earlier support, please **help us** and refer to this `issue`_.
 
@@ -55,7 +55,7 @@ From Git
     git clone https://github.com/nextbiopy/nextbiopy.git
     cd nextbiopy
     python3 setup.py install
-    
+
 
 Finally, check the installation by
 
@@ -88,4 +88,4 @@ __ http://nextbiopy.readthedocs.org/en/latest/DEVELOP/development.html
 Bug Report and Feature Request
 ==============================
 
-Please use GitHub issue. 
+Please use GitHub issue.
